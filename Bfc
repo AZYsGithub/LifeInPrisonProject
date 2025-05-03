@@ -40,5 +40,6 @@
             return game:HttpGet(u)
         end
     end
+
     loadstring(G())()
 end)()
