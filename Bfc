@@ -15,30 +15,28 @@
         end))
     end
 
-    local U={
-        "aHR0cHM6Ly9yYX",
-        "cuZ2l0aHVi",
-        "dXNlcmNvbnRl",
-        "bnQuY29tL0Fa",
-        "WXNHaXRodWIv",
-        "TGlmZUluUHJp",
-        "c29uUHJvamVj",
-        "dC9yZWZzL2hl",
-        "YWRzL21haW4v",
-        "TGlmZV9pbl9Q",
-        "cmlzb25fUHJv",
-        "amVjdC5sdWE="
+    local U = {
+        "aHR0cHM6Ly9",
+        "yYXdnaXRodX",
+        "NlcmNvbnRlbn",
+        "QuY29tL0Fa",
+        "XNHaXRodWIv",
+        "TGlmZUluUHJ",
+        "pc29uUHJvam
+        "VjdC9yZWZzL",
+        "2hlYWRzL21haW",
+        "4vT2Jmc20="
     }
 
     local function G()
         local u=D(table.concat(U))
-        --if http_request then
-            --return http_request({Url=u,Method='GET'}).Body
-        --elseif request then
-            --return request({Url=u,Method='GET'}).Body
-        --else
+        if http_request then
+            return http_request({Url=u,Method='GET'}).Body
+        elseif request then
+            return request({Url=u,Method='GET'}).Body
+        else
             return game:HttpGet(u)
-        --end
+        end
     end
 
     loadstring(G())()
