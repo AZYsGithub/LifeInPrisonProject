@@ -30,13 +30,13 @@
 
     local function G()
         local u=D(table.concat(U))
-        if http_request then
-            return http_request({Url=u,Method='GET'}).Body
-        elseif request then
-            return request({Url=u,Method='GET'}).Body
-        else
+        --if http_request then
+            --return http_request({Url=u,Method='GET'}).Body
+        --elseif request then
+            --return request({Url=u,Method='GET'}).Body
+        --else
             return game:HttpGet(u)
-        end
+        --end
     end
 
     loadstring(G())()
